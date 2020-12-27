@@ -14,11 +14,19 @@ class Solution {
         TreeNode root=new TreeNode(preorder[0]);
         int low=0;
         int high=inorder.length;
-        find(low,high,inorder,0,preorder,root);
+        Integer n=0;
+        find(low,high,inorder,n,preorder,root);
         return root;
     }
     void find(int low,int high,int[] inorder,Integer n,int[] preorder,TreeNode root)
     {
+        if(low>=high)
+            return;
+        else
+        {
+            root.left=new TreeNode(0);
+            root.right=new TreeNode(0);
+        }
         int index=0;
         for (int i = low; i < high; i++) {
             if(inorder[i]==preorder[n])
@@ -27,13 +35,6 @@ class Solution {
                 TreeNode temp=new TreeNode(inorder[i]);
                 root=temp;
             }
-        }
-        if(index==low||index==high)
-            return;
-        else
-        {
-            root.left=new TreeNode(0);
-            root.right=new TreeNode(0);
         }
         n++;
         find(low,index,inorder,n,preorder,root.left);
